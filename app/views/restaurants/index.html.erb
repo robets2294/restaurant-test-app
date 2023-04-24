@@ -1,0 +1,42 @@
+<div class="container">
+  <h1 class="display-4">Estado de los restaurantes y dispositivos/servidores</h1>
+
+  <% @restaurants.each do |restaurant| %>
+    <div class="card my-4">
+      <div class="card-header bg-primary text-white">
+        <h2 class="card-title"><%= restaurant.name %></h2>
+      </div>
+      <div class="card-body">
+        <p class="card-text">Última actualización: <%= restaurant.updated_at.localtime.strftime('%H:%M:%S - %d/%m/%Y') %></p>
+        <p class="card-text">Estado: <%= restaurant.status %></p>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Última actualización</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% restaurant.devices.each do |device| %>
+              <tr>
+                <td><%= device.name %></td>
+                <td><%= device.updated_at.localtime.strftime('%H:%M:%S - %d/%m/%Y') %></td>
+                 <td><% if device.status == 'ok' %>
+                        <span class="text-success">&#x25cf;</span>
+                      <% elsif device.status == 'warning' %>
+                        <span class="text-warning">&#x25cf;</span>
+                      <% else %>
+                        <span class="text-danger">&#x25cf;</span>
+                      <% end %>
+                    <%= device.status %>
+                  </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+</div>

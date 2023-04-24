@@ -1,0 +1,2 @@
+class PrinterServer < Device
+end

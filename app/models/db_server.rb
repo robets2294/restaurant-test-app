@@ -1,0 +1,2 @@
+class DbServer < Device
+end
